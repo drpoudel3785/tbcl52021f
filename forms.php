@@ -9,9 +9,16 @@
      $pass = $_POST['password'];
      if(!empty($user) && !empty($pass))
      { 
-         echo "The Username is " .$user. "The Password is " .$pass;
+      $user1 =  trim(filter_var($user, FILTER_SANITIZE_STRING));
+      if(filter_var($user, FILTER_VALIDATE_EMAIL))
+     {
+        
+         echo "The Username is " .$user1. "The Password is " .$pass;
+      }
+       else{
+        echo "Username must be in email format";
      }
-      
+     }
      else
      {
          echo "Plese fill the username and password";
@@ -29,8 +36,8 @@
 <body>
 
    <form name="Login" action="" method="POST" enctype="multipart/form-data">
-     <input type="text" name="username" placeholder="Username"/>
-     <input type="password" name="password" placeholder= "Password"/>
+     <input type="text" name="username" placeholder="example@domain.com" value="<?php if(isset($_POST['username'])){ echo $_POST['username']; } ?>"/>
+     <input type="password" name="password" placeholder= "Password" value="<?php if(isset($_POST['password'])){ echo $_POST['password']; } ?>"/>
      <input type="submit" name="submit" value="Login"/>
    </form>
     
