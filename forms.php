@@ -7,17 +7,28 @@
    {
      $user = $_POST['username'] ;
      $pass = $_POST['password'];
+     //https://www.ocpsoft.org/tutorials/regular-expressions/password-regular-expression/
+     $pattern ="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/";
      if(!empty($user) && !empty($pass))
      { 
       $user1 =  trim(filter_var($user, FILTER_SANITIZE_STRING));
+      if(preg_match($pattern, $pass))
+      {
       if(filter_var($user, FILTER_VALIDATE_EMAIL))
      {
         
          echo "The Username is " .$user1. "The Password is " .$pass;
       }
+   
+
        else{
         echo "Username must be in email format";
      }
+    }
+    else
+    {
+      echo "Password must be complex";
+    }
      }
      else
      {
