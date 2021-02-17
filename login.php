@@ -21,9 +21,10 @@
      {
      	echo "Pls fill all the fields";
      }
+     mysqli_close($conn);
   }
 
-  mysqli_close($conn);
+  
 ?>
 
 <!DOCTYPE html>
@@ -41,5 +42,8 @@
     <input type="submit" name="submit" value="Login"/>
 
     </form>
+
+    <hr/>
+   <p>Don't Have a Account Clieck  <a href="register.php">Register</a></p>
 </body>
 </html>
