@@ -19,7 +19,7 @@
     include('connection.php');
     $qry =  mysqli_query($conn, $sql);
    // var_dump($qry);
-   $count = mysqli_num_rows($qry);
+   $count = mysqli_num_rows($qry) or die(mysqli_erro($conn));
    echo "Thre are ".$count. " records.";
    if($count>=1)
    {

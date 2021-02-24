@@ -21,7 +21,7 @@ if(isset($_GET['id']))
     }
     else
     {
-        echo "Oops! there is problem while deleting the record". mysqli_error();
+        echo "Oops! there is problem while deleting the record". mysqli_error($conn);
     }
 }
 else{

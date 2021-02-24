@@ -41,7 +41,7 @@ if(isset($_POST['submit']))
   }
 
   include('connection.php');
-  $qry= mysqli_query($conn, $sql);
+  $qry= mysqli_query($conn, $sql)or die(mysqli_erro($conn));
   if($qry)
   {
     header("Location: getallusers.php?msg=$username Updated Successfully.");
