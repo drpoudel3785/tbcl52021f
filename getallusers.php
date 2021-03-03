@@ -1,3 +1,11 @@
+<?php
+//include
+//include_once
+//require
+//require_once
+require_once('sessioncheck.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +15,11 @@
     <title>All USers</title>
 </head>
 <body>
+
+<p> Welcome,  <?php echo $_SESSION['username']; ?> <a href="logout.php">Logout</a></p>
+
+<hr/>
+
 <a href="register.php">Add User</a>
 <br/>
 

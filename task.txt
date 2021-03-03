@@ -1,0 +1,38 @@
+Task 1: Create table Category with following fields
+------------------------------------------------------
+id int PRIMARY KEY AUTO_INCREMENT,
+name varchar(30) NOT NULL UNIQUE,
+description varchar(250) NULL,
+status tinyint(1) NULL
+========================================================
+Task 2: category.php
+Make a HTML FORM for inserting the data and process it.
+Insert some sample data
+========================================================
+Task 3: selectcategory.php
+1. SELECT all Category data
+2. SELECT ALL name starting with a(SELECT name FROM category WHERE name LIKE 'a%')
+3. SELECT all data with status 0 (SELECT * FROM category WHERE status=0)
+include('connection.php);
+$sql = "SELECT * FROM category;
+$qry=mysqli_query($conn, $sql);
+if($qry)
+{
+    while($row=mysqli_fetch_array($qry))
+    {
+        echo $row['id]. " ". $row['name']. "<br/>";
+    }
+}
+
+
+echo "SELECT ALL Name starting with a";
+$sql = "SELECT * FROM category WHERE name LIKE 'a%'";
+$qry=mysqli_query($conn, $sql);
+if($qry)
+{
+    while($row=mysqli_fetch_array($qry))
+    {
+        echo $row['id]. " ". $row['name']. "<br/>";
+    }
+}
+

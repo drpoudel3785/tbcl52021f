@@ -1,17 +1,33 @@
 <?php
+session_start();
+
+//let's
+//let\s
   if(isset($_POST['submit']))
   {
-     $user = $_POST['username'];
-     $pass = $_POST['password'];
+     $user = addslashes(trim($_POST['username']));
+     $pass = addslashes(trim(md5($_POST['password'])));
+     if(isset($_POST['remember']) && !empty($_POST['remember']))
+     {
+       setcookie("username", $user, time() + (60*60*24*7),"/");
+       setcookie("password", $_POST['password'], time() + (60*60*24*7),"/");
+
+     }
+
      if(!empty($user) && !empty($pass))
      {
-     	$sql = "SELECT * FROM users WHERE username='$user' && password = '$pass' ";
+     	$sql = "SELECT * FROM users WHERE username='$user' && password = '$pass' && status=1";
      	include('connection.php');
-     	$qry = mysqli_query($conn, $sql);
+     	$qry = mysqli_query($conn, $sql) or die(mysqli_error($conn));
      	$count = mysqli_num_rows($qry);
      	if($count==1)
      	{
-     		echo "Login SUccess";
+         session_unset();
+        $ssid = session_regenerate_id();
+        $_SESSION['username'] = $user;
+        $_SESSION['sid'] = $ssid;
+
+     		header("Location: getallusers.php");
      	}
      	else{
      		echo "Login Failed";
@@ -23,8 +39,6 @@
      }
      mysqli_close($conn);
   }
-
-  
 ?>
 
 <!DOCTYPE html>
@@ -37,10 +51,10 @@
 </head>
 <body>
     <form name="login" method="POST" action="">
-    <input type="text" name="username" />
-    <input type="password" name = "password"/>
+    <input type="text" name="username" value="<?php if(isset($_COOKIE['username'])) echo $_COOKIE['username']; ?>" /> <br/>
+    <input type="password" name = "password" value="<?php if(isset($_COOKIE['password'])) echo $_COOKIE['password']; ?>"/> <br/>
+    <input type="checkbox" name="remember" value="1"/>Remember Me <br/>
     <input type="submit" name="submit" value="Login"/>
-
     </form>
 
     <hr/>
