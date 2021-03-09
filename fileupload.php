@@ -1,3 +1,4 @@
+<?php include('functions.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +12,14 @@
 <?php
   if(isset($_POST['submit']))
   {
-      $name = $_FILES['upload']['name'];
-      $size = $_FILES['upload']['size'];
-      $type =  $_FILES['upload']['type'];
+      $name1 = $_FILES['uploadme']['name'];
+      $size = $_FILES['uploadme']['size'];
+      $type1 =  $_FILES['uploadme']['type'];
 
-      $location = "uploads/".$name;
-if($type=="images/jpeg" || $type=="images/jpg" ||  $type=="images/png"  || $type=="images/gif" )
+      $location = "uploads/".$name1;
+if($type1=="images/jpeg" || $type1=="images/jpg" ||  $type1=="images/png"  || $type1=="images/gif" )
 {
-      if(move_uploaded_file($_FILES["upload"]["tmp_name"], $location)) {
+      if(move_uploaded_file($_FILES["uploadme"]["tmp_name"], $location)) {
         echo "File Uploaded";
         echo "<img src=$location width=100px>";
   }
@@ -32,7 +33,10 @@ else{
 }
 ?>
 <form method="POST" name="imageUpload" action="" enctype="multipart/form-data">
-<input type="file" name="upload" />
+
+<?php categoryDropDown(); ?>
+
+<input type="file" name="uploadme" />
 <input type="submit" name="submit" value="Upload"/>
 </form>
     
